@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalendarOptions } from "@fullcalendar/angular";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'full-calendar-lab';
+  
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth'
+  };
+
 }

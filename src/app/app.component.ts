@@ -1,6 +1,5 @@
 import { Component} from '@angular/core';
-import { CalendarOptions, EventClickArg, EventDropArg } from "@fullcalendar/angular";
-import { DateClickArg } from '@fullcalendar/interaction';
+import { CalendarOptions, DateSelectArg, EventDropArg, EventClickArg, EventApi } from "@fullcalendar/angular";
 
 
 @Component({
@@ -22,7 +21,9 @@ export class AppComponent {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
-    dateClick: this.handleDateClick.bind(this),
+    //dateClick: this.handleDateClick.bind(this),
+    //eventClick: this.handleEventClick.bind(this),
+    select: this.handleInfoEvent.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventDrop: this.handleEventDrop.bind(this),
     events: [
@@ -40,19 +41,40 @@ export class AppComponent {
     this.calendarOptions.weekends = !this.calendarOptions.weekends
   }
 
-  handleDateClick(arg:DateClickArg) {
+  /* handleDateClick(arg: DateClickArg) {
     alert('date click! ' + arg.dateStr)
     // apri una finestra modale che contiene un componente che serve per iserire una attività
 
-  }
+  } */
 
   handleEventDrop(arg: EventDropArg){
     console.debug(arg);
   }
 
-  handleEventClick(arg:EventClickArg) {
-    alert("Stai modificando l'evento con l'id: " + arg.event.extendedProps['department']);
+  handleInfoEvent(selectInfo: DateSelectArg){
+    const title= prompt('Plese enter the title of the event');
+    const events = selectInfo.view.calendar;
+
+    events.unselect();
+
+    if(title){
+      events.addEvent({
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
+      })
+    }
   }
+
+  handleEventClick(clickInfo: EventClickArg){
+    if(confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`))
+    clickInfo.event.remove();
+  }
+
+ /*  handleEventClick(arg:EventClickArg) {
+    alert("Stai modificando l'evento con l'id: " + arg.event.extendedProps['department']);
+  } */
 
   /* let str = formatDate(new Date(), {
     month: 'long',

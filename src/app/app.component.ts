@@ -21,6 +21,8 @@ export class AppComponent {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
+    slotMinTime: "06:00:00",
+    slotMaxTime: "21:00:00",
     //dateClick: this.handleDateClick.bind(this),
     //eventClick: this.handleEventClick.bind(this),
     select: this.handleInfoEvent.bind(this),

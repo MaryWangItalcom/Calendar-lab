@@ -5,12 +5,16 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
-FullCalendarModule.registerPlugins([
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
-  interactionPlugin
-])
-
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin,
+]);
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ FullCalendarModule.registerPlugins([
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

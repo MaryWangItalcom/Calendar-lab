@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventDropArg, EventClickArg, EventApi } from "@fullcalendar/angular";
-
+import { Calendar } from "@fullcalendar/core";
+import { CalendarOptions, DateSelectArg, EventDropArg, EventClickArg, EventApi} from "@fullcalendar/angular";
+import itLocale from "@fullcalendar/core/locales/it";
 
 @Component({
   selector: 'app-root',
@@ -22,9 +23,8 @@ export class AppComponent {
     selectMirror: true,
     dayMaxEvents: true,
     slotMinTime: "06:00:00",
-    slotMaxTime: "21:00:00",
-    //dateClick: this.handleDateClick.bind(this),
-    //eventClick: this.handleEventClick.bind(this),
+    slotMaxTime: "20:00:00",
+    locales: [itLocale],
     select: this.handleInfoEvent.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventDrop: this.handleEventDrop.bind(this),
@@ -33,21 +33,21 @@ export class AppComponent {
         department: 'BioChemistry'
       }
     },
-      {id:'2', title: 'event 2', date: '2021-11-16', editable: false}
+      {title: 'event 2', date: '2021-11-16', editable: false}
     ],
-
+    titleFormat: {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    },
+    timeZone: 'UTC',
+    locale: 'it',
 
   };
 
   toggleWeekends() {
     this.calendarOptions.weekends = !this.calendarOptions.weekends
   }
-
-  /* handleDateClick(arg: DateClickArg) {
-    alert('date click! ' + arg.dateStr)
-    // apri una finestra modale che contiene un componente che serve per iserire una attività
-
-  } */
 
   handleEventDrop(arg: EventDropArg){
     console.debug(arg);
@@ -74,17 +74,5 @@ export class AppComponent {
     clickInfo.event.remove();
   }
 
- /*  handleEventClick(arg:EventClickArg) {
-    alert("Stai modificando l'evento con l'id: " + arg.event.extendedProps['department']);
-  } */
-
-  /* let str = formatDate(new Date(), {
-    month: 'long',
-    year: 'numeric',
-    day: 'numeric'
-  }); 
-
-  console.log(str); */
-  
 
 }
